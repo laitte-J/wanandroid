@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="model"
+            type="cn.laitt.wanandroid.model.DataX" />
+
+        <import type="android.view.View" />
+
+        <import type="android.text.TextUtils" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/rl_article"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/dp16"
+        android:paddingTop="@dimen/dp12"
+        android:paddingRight="@dimen/dp16">
+
+
+        <TextView
+            android:id="@+id/tv_author"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{TextUtils.isEmpty(model.author)?model.shareUser:model.author}"
+            android:textColor="@color/colorAccent"
+            android:textSize="@dimen/text_notes"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_goneMarginLeft="0dp"
+            tools:text="林帅并不帅" />
+
+
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_alignTop="@+id/tv_author"
+            android:layout_alignBottom="@+id/tv_author"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="@{model.niceShareDate}"
+            android:textColor="@color/thridTextColor"
+            android:textSize="@dimen/text_notes"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="21小时前" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_author">
+
+            <ImageView
+                android:id="@+id/iv"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_marginTop="@dimen/dp12"
+                android:scaleType="centerCrop"
+                android:visibility="@{TextUtils.isEmpty(model.envelopePic)?View.GONE:View.VISIBLE}"
+                app:imageUrl="@{model.envelopePic}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@mipmap/no_pic"
+                tools:visibility="gone" />
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp5"
+                android:layout_marginTop="@dimen/dp5"
+                android:ellipsize="end"
+                android:includeFontPadding="false"
+                android:lineSpacingExtra="0dp"
+                android:maxLines="2"
+                android:singleLine="false"
+                android:textColor="@color/primaryTextColor"
+                android:textSize="@dimen/text_content"
+                app:htmlText="@{model.title}"
+                app:layout_constraintLeft_toRightOf="@id/iv"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_goneMarginLeft="0dp"
+                tools:text="Android  Home 键再切回来，会发生什么" />
+
+            <TextView
+                android:id="@+id/tv_content"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp5"
+                android:ellipsize="end"
+                android:includeFontPadding="false"
+                android:lineSpacingExtra="0dp"
+                android:maxLines="3"
+                android:singleLine="false"
+                android:textColor="@color/thridTextColor"
+                android:textSize="@dimen/text_auxiliary"
+                android:visibility="@{TextUtils.isEmpty(model.desc)?View.GONE:View.VISIBLE}"
+                app:htmlText="@{model.desc}"
+                app:layout_constraintLeft_toLeftOf="@id/tv_title"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_title"
+                app:layout_goneMarginLeft="0dp"
+                tools:text="Android 面试黑洞;  键再切回来，会发生什么" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="12dp"
+            android:background="@color/color_f5f5f5"
+            app:layout_constraintTop_toBottomOf="@id/container" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

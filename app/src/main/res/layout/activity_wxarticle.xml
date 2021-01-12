@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true">
+
+        <RelativeLayout
+            android:id="@+id/rl_title"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            android:background="@color/colorAccent"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+            <ImageView
+                android:id="@+id/iv_search"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:padding="16dp"
+                android:src="@mipmap/icon_search_hint"
+                android:tint="@color/white"
+                app:tint="@color/white"
+                tools:ignore="UseAppTint" />
+
+            <EditText
+                android:id="@+id/et"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp35"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="@dimen/dp12"
+                android:layout_marginRight="@dimen/dp12"
+                android:layout_toLeftOf="@id/iv_search"
+                android:layout_toRightOf="@id/iv_back"
+                android:background="@drawable/bg_solid_round_color_background_radius_def"
+                android:drawableLeft="@mipmap/icon_search"
+                android:drawablePadding="@dimen/dp12"
+                android:gravity="center_vertical"
+                android:hint="搜一搜"
+                android:paddingLeft="@dimen/dp12"
+                android:textSize="@dimen/sp_14" />
+
+            <ImageView
+                android:id="@+id/iv_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:padding="16dp"
+                android:src="@mipmap/icon_back"
+                android:tint="@color/white"
+                app:tint="@color/white"
+                tools:ignore="UseAppTint" />
+
+
+        </RelativeLayout>
+
+
+        <com.scwang.smart.refresh.layout.SmartRefreshLayout
+            android:id="@+id/srl"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/rl_title">
+
+            <com.scwang.smart.refresh.header.ClassicsHeader
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rcv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToPadding="false"
+                android:overScrollMode="never"
+                android:scrollbars="none"
+                tools:layoutmanager="LinearLayoutManager"
+                tools:listitem="@layout/listitem_wx_article" />
+
+            <com.scwang.smart.refresh.footer.ClassicsFooter
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </com.scwang.smart.refresh.layout.SmartRefreshLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

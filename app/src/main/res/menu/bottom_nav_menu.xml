@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/navigation_home"
+        android:icon="@drawable/selector_menu_home"
+        android:title="@string/home" />
+
+
+    <item
+        android:id="@+id/navigation_question"
+        android:icon="@drawable/selector_menu_question"
+        android:title="@string/question" />
+
+    <item
+        android:id="@+id/navigation_knowledge"
+        android:icon="@drawable/selector_menu_knowledge"
+        android:title="@string/knowledge" />
+    <item
+        android:id="@+id/navigation_mine"
+        android:icon="@drawable/selector_menu_mine"
+        android:title="@string/mine" />
+</menu>

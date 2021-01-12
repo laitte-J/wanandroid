@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+<variable
+    name="user"
+    type="cn.laitt.wanandroid.db.model.UserInfo" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/color_FFF2F6F9">
+
+        <ImageView
+            android:id="@+id/iv_bg"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@color/color_FFF2F6F9"
+            app:layout_constraintDimensionRatio="w,1:3"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent="1" />
+
+        <ImageView
+            android:id="@+id/iv_icon"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="@dimen/dp_40"
+            android:layout_marginRight="@dimen/dp16"
+            app:circleImageUrl="@{user.icon}"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/bg_solid_round_color_background_alpha_radius_max" />
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp16"
+            android:gravity="center"
+            android:textColor="@color/primaryTextColor"
+            android:textSize="@dimen/sp18"
+            android:text="@{user.username}"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/iv_icon"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="@id/iv_icon"
+            tools:text="dahaigg" />
+
+        <TextView
+            android:id="@+id/tv_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp6"
+            android:layout_marginLeft="@dimen/dp16"
+            android:background="@drawable/bg_solid_round_color_background_alpha_radius_max"
+            android:gravity="center"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:text="@{@string/uid(user.id)}"
+            android:textColor="@color/secondaryTextColor"
+            android:textSize="@dimen/sp_14"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_name"
+            tools:text="@string/uid" />
+
+
+        <RelativeLayout
+            android:id="@+id/rl_user"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="17dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="16dp"
+            android:background="@drawable/item_12_radius_white_selector"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_bg">
+
+            <ImageView
+                android:id="@+id/iv5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="16dp"
+                android:src="@mipmap/ic_read_later"
+                android:tint="@color/colorAccent"
+                tools:ignore="UseAppTint" />
+
+            <TextView
+                android:id="@+id/tv_sys_user"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_toRightOf="@id/iv5"
+                android:drawableRight="@mipmap/icon_arrow_right"
+                android:drawablePadding="12dp"
+                android:gravity="center_vertical"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp"
+                android:paddingBottom="2dp"
+                android:text="个人信息"
+                android:textColor="@color/primaryTextColor"
+                android:textSize="@dimen/sp16" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginRight="16dp"
+            android:background="@drawable/item_12_radius_white_selector"
+            android:orientation="vertical"
+            app:layout_constraintTop_toBottomOf="@id/rl_user">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:id="@+id/ll_collect"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/iv1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginTop="17dp"
+                    android:src="@mipmap/ic_collect"
+                    android:tint="@color/colorAccent"
+                    tools:ignore="UseAppTint" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:layout_toRightOf="@id/iv1"
+                    android:drawableRight="@mipmap/icon_arrow_right"
+                    android:drawablePadding="12dp"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="12dp"
+                    android:paddingRight="12dp"
+                    android:paddingBottom="2dp"
+                    android:text="收藏文章"
+                    android:textColor="@color/primaryTextColor"
+                    android:textSize="@dimen/sp16" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:background="@color/color_F2F2F2" />
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:id="@+id/rl_link"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/iv22"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginTop="17dp"
+                    android:src="@mipmap/ic_copy_link"
+                    android:tint="@color/colorAccent"
+                    tools:ignore="UseAppTint"  />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:layout_toRightOf="@id/iv22"
+                    android:background="@drawable/item_12_radius_white_selector"
+                    android:drawableRight="@mipmap/icon_arrow_right"
+                    android:drawablePadding="12dp"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="12dp"
+                    android:paddingRight="12dp"
+                    android:paddingBottom="2dp"
+                    android:text="收藏网址"
+                    android:textColor="@color/primaryTextColor"
+                    android:textSize="@dimen/sp16" />
+            </RelativeLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:background="@color/color_F2F2F2" />
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/iv2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginTop="17dp"
+                    android:src="@mipmap/ic_share"
+                    android:tint="@color/colorAccent"
+                    tools:ignore="UseAppTint"  />
+
+                <TextView
+                    android:id="@+id/tv_shared"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:layout_toRightOf="@id/iv2"
+                    android:background="@drawable/item_12_radius_white_selector"
+                    android:drawableRight="@mipmap/icon_arrow_right"
+                    android:drawablePadding="12dp"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="12dp"
+                    android:paddingRight="12dp"
+                    android:paddingBottom="2dp"
+                    android:text="我的分享"
+                    android:textColor="@color/primaryTextColor"
+                    android:textSize="@dimen/sp16" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:background="@color/color_F2F2F2" />
+
+            <RelativeLayout
+                android:id="@+id/rl_coin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/iv3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginTop="17dp"
+                    android:src="@mipmap/ic_coin"
+                    android:tint="@color/colorAccent"
+                    tools:ignore="UseAppTint" />
+
+                <TextView
+                    android:id="@+id/t1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="56dp"
+                    android:layout_toRightOf="@id/iv3"
+                    android:background="@drawable/item_12_radius_white_selector"
+                    android:drawablePadding="12dp"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="12dp"
+                    android:paddingRight="12dp"
+                    android:paddingBottom="2dp"
+                    android:text="我的积分"
+                    android:textColor="@color/primaryTextColor"
+                    android:textSize="@dimen/sp16" />
+
+                <TextView
+                    android:id="@+id/tv_coin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="56dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_toRightOf="@id/t1"
+                    android:background="@drawable/item_12_radius_white_selector"
+                    android:drawableRight="@mipmap/icon_arrow_right"
+                    android:drawablePadding="12dp"
+                    android:gravity="center_vertical|right"
+                    android:paddingLeft="12dp"
+                    android:paddingRight="12dp"
+                    android:paddingBottom="2dp"
+                    android:text="@{user.coinCount.toString()}"
+                    android:textColor="@color/thridTextColor"
+                    android:textSize="@dimen/sp16" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginRight="16dp"
+            android:background="@drawable/item_12_radius_white_selector"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ll_content">
+
+            <ImageView
+                android:id="@+id/iv4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="16dp"
+                android:src="@mipmap/ic_setting"
+                android:tint="@color/color_FF3E3E"
+                tools:ignore="UseAppTint" />
+
+            <TextView
+                android:id="@+id/tv_out"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_toRightOf="@id/iv4"
+                android:drawableRight="@mipmap/icon_arrow_right"
+                android:drawablePadding="12dp"
+                android:drawableTint="@color/color_FF3E3E"
+                android:gravity="center_vertical"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp"
+                android:paddingBottom="2dp"
+                android:text="退出登录"
+                android:textColor="@color/color_FF3E3E"
+                android:textSize="@dimen/sp16" />
+        </RelativeLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

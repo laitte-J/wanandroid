@@ -1,0 +1,48 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 30
+
+
+    defaultConfig {
+        minSdkVersion 21
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles 'consumer-rules.pro'
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    buildToolsVersion '30.0.0'
+
+}
+
+dependencies {
+    implementation "com.squareup.retrofit2:retrofit:$retrofit"
+    api "com.squareup.retrofit2:converter-gson:$retrofit"
+    implementation "com.squareup.okhttp3:logging-interceptor:$loggingInterceptor"
+//    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.9.0'
+    //    Retrofit的CallAdaper还只支持RxJava2 ，而不支持Rxjava3。
+    implementation "com.github.akarnokd:rxjava3-retrofit-adapter:$retrofitAdapter"
+    //v1.5
+    implementation "io.reactivex.rxjava3:rxandroid:$rxandroid"
+    // Because RxAndroid releases are few and far between, it is recommended you also
+    // explicitly depend on RxJava's latest version for bug fixes and new features.
+    // (see https://github.com/ReactiveX/RxJava/releases for latest 2.x.x version)
+    implementation "io.reactivex.rxjava3:rxjava:$rxjava"
+    implementation "com.blankj:utilcodex:$utilcodex"
+    api "androidx.preference:preference:$preference"
+    api project(':base')
+    implementation "com.github.franmontiel:PersistentCookieJar:$persistentCookieJar"
+
+}

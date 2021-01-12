@@ -1,0 +1,7 @@
+include ':flycodialog'
+include ':common'
+include ':network'
+include ':webview'
+include ':base'
+include ':app'
+rootProject.name = "wanAndroid"

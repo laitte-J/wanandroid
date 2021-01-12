@@ -1,0 +1,112 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+android {
+    compileSdkVersion 30
+    buildToolsVersion "30.0.2"
+
+    defaultConfig {
+        applicationId "cn.laitt.wanandroid"
+        minSdkVersion 21
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    signingConfigs {
+        release {
+            storeFile file('D:\\luodahai\\wanAndroid\\wqSupplier.jks')
+            storePassword 'wq12345679'
+            keyPassword 'wq12345679'
+            keyAlias 'key0'
+        }
+        debug {
+            storeFile file('D:\\luodahai\\wanAndroid\\wqSupplier.jks')
+            storePassword 'wq12345679'
+            keyAlias 'key0'
+            keyPassword 'wq12345679'
+        }
+    }
+    buildTypes {
+        debug {
+            debuggable true
+            zipAlignEnabled true
+            debuggable true
+            minifyEnabled false //是否混淆
+            shrinkResources false //是否去除无效的资源文件
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.debug
+        }
+        release {
+            zipAlignEnabled true
+            debuggable false
+            minifyEnabled true //是否混淆
+            shrinkResources true //是否去除无效的资源文件
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+    }
+
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    buildFeatures {
+        dataBinding true
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation "androidx.core:core-ktx:$rootProject.ext.corektx"
+    implementation "androidx.appcompat:appcompat:$rootProject.ext.androidXVersion"
+    implementation "androidx.constraintlayout:constraintlayout:$rootProject.ext.constraintlayou"
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    api project(':base')
+    api project(":webview")
+    api project(':network')
+    api project(':common')
+    api project(':flycodialog')
+    implementation "androidx.navigation:navigation-fragment:$rootProject.ext.navigation"
+    implementation "androidx.navigation:navigation-ui:$rootProject.ext.navigation"
+    implementation "io.reactivex.rxjava3:rxjava:$rootProject.ext.rxjava"
+    implementation "io.reactivex.rxjava3:rxandroid:$rootProject.ext.rxandroid"
+    implementation "com.youth.banner:banner:$rootProject.ext.banner"
+    implementation "com.blankj:utilcodex:$rootProject.ext.utilcodex"
+    // 基础依赖包，必须要依赖
+    implementation"com.gyf.immersionbar:immersionbar:$rootProject.ext.immersionbar"
+// fragment快速实现（可选）
+    implementation"com.gyf.immersionbar:immersionbar-components:$rootProject.ext.immersionbarComponents"
+
+    implementation "com.github.LuckSiege.PictureSelector:picture_library:$rootProject.ext.picturLibrary"
+    implementation "com.github.CymChad:BaseRecyclerViewAdapterHelper:$rootProject.ext.baseRecyclerViewAdapterHelper"
+    implementation "com.google.android:flexbox:$rootProject.ext.flexbox"
+    implementation  'com.scwang.smart:refresh-layout-kernel:2.0.1'      //核心必须依赖
+    implementation  'com.scwang.smart:refresh-header-classics:2.0.1'    //经典刷新头
+    implementation  'com.scwang.smart:refresh-footer-classics:2.0.1'    //经典加载
+
+    implementation "androidx.room:room-runtime:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
+
+    // optional - Kotlin Extensions and Coroutines support for Room
+    implementation "androidx.room:room-ktx:$room_version"
+
+    // optional - Test helpers
+    testImplementation "androidx.room:room-testing:$room_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines"
+
+}

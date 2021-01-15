@@ -23,7 +23,6 @@ import com.arch.base.common.utils.LiveDataBus
 import com.arch.base.core.activity.MvvmActivity
 import com.arch.base.core.utils.ToastUtil
 import com.gyf.immersionbar.ImmersionBar
-import kotlinx.android.synthetic.main.activity_search.*
 import kotlinx.coroutines.*
 
 

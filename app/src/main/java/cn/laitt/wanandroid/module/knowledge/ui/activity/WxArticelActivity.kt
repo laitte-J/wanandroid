@@ -22,7 +22,6 @@ import com.chad.library.adapter.base.listener.OnItemClickListener
 import com.chad.library.adapter.base.viewholder.BaseDataBindingHolder
 import com.emcrp.webview.WebviewActivity
 import com.gyf.immersionbar.ImmersionBar
-import kotlinx.android.synthetic.main.activity_search.*
 
 class WxArticelActivity :
     MvvmActivity<ActivityWxarticleBinding, WxSearchResultViewModel, DataX>() {
@@ -82,9 +81,9 @@ class WxArticelActivity :
                 viewDataBinding.srl.finishLoadMore()
             }
         })
-        viewDataBinding.srl.setOnRefreshListener { viewModel?.refresh(et.text.toString().trim()) }
+        viewDataBinding.srl.setOnRefreshListener { viewModel?.refresh(viewDataBinding.et.text.toString().trim()) }
 
-        viewDataBinding.srl.setOnLoadMoreListener { viewModel?.loadNext(et.text.toString().trim()) }
+        viewDataBinding.srl.setOnLoadMoreListener { viewModel?.loadNext(viewDataBinding.et.text.toString().trim()) }
         emptyView = getLayoutInflater().inflate(
             R.layout.layout_state_empty,
             viewDataBinding.srl.getParent() as ViewGroup,

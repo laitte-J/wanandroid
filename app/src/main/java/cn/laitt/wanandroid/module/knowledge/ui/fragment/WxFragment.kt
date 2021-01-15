@@ -16,7 +16,6 @@ import com.arch.base.core.fragment.MvvmFragment
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.listener.OnItemClickListener
 import com.chad.library.adapter.base.viewholder.BaseDataBindingHolder
-import kotlinx.android.synthetic.main.fragment_wx.*
 
 class WxFragment : MvvmFragment<FragmentWxBinding, WxViewModel, Wx.Data>() {
     companion object {
@@ -26,14 +25,14 @@ class WxFragment : MvvmFragment<FragmentWxBinding, WxViewModel, Wx.Data>() {
     lateinit var adapter: BaseQuickAdapter<Wx.Data, BaseDataBindingHolder<ListitemWxBinding>>
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        rcv.layoutManager = LinearLayoutManager(context)
+        viewDataBinding.rcv.layoutManager = LinearLayoutManager(context)
         adapter = object :
             BaseQuickAdapter<Wx.Data, BaseDataBindingHolder<ListitemWxBinding>>(R.layout.listitem_wx) {
             override fun convert(holder: BaseDataBindingHolder<ListitemWxBinding>, item: Wx.Data) {
                 holder.dataBinding?.model = item
             }
         }
-        rcv.adapter = adapter
+        viewDataBinding.rcv.adapter = adapter
         adapter.setEmptyView(R.layout.layout_state_loading)
         adapter.apply {
             setOnItemClickListener(object : OnItemClickListener {

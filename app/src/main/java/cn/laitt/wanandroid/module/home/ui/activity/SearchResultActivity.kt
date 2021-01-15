@@ -24,8 +24,6 @@ import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.listener.OnItemClickListener
 import com.emcrp.webview.WebviewActivity
 import com.gyf.immersionbar.ImmersionBar
-import kotlinx.android.synthetic.main.fragment_home.*
-import kotlinx.android.synthetic.main.fragment_home.view.*
 
 /**
  * 搜索结果

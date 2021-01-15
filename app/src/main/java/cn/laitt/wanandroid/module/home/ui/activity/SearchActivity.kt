@@ -28,7 +28,6 @@ import com.flyco.dialog.listener.OnBtnClickL
 import com.flyco.dialog.widget.MaterialDialog
 import com.google.android.flexbox.FlexboxLayoutManager
 import com.gyf.immersionbar.ImmersionBar
-import kotlinx.android.synthetic.main.activity_search.*
 import kotlinx.coroutines.*
 
 
@@ -58,16 +57,16 @@ class SearchActivity : MvvmActivity<ActivitySearchBinding, SearchViewModel, Hotk
 
         viewDataBinding.ivBack.setOnClickListener { finish() }
         viewDataBinding.ivSearch.setOnClickListener {
-            if (!TextUtils.isEmpty(et.text.toString().trim())) {
+            if (!TextUtils.isEmpty(viewDataBinding.et.text.toString().trim())) {
                 launch {
                     withContext(Dispatchers.IO) {
                         searchHistroyViewModel?.insert(
-                            SearchHistroy(et.text.toString())
+                            SearchHistroy(viewDataBinding.et.text.toString())
                         )
                     }
                     SearchResultActivity.start(
                         this@SearchActivity,
-                        et.text.toString()
+                        viewDataBinding.et.text.toString()
                     )
                 }
             }
@@ -92,7 +91,7 @@ class SearchActivity : MvvmActivity<ActivitySearchBinding, SearchViewModel, Hotk
                 holder.dataBinding!!.tvName.text = item.name
             }
         }
-        rv_hot.adapter = mHotAdapter
+        viewDataBinding.rvHot.adapter = mHotAdapter
         mHotAdapter.setOnItemClickListener(object : OnItemClickListener {
             override fun onItemClick(adapter: BaseQuickAdapter<*, *>, view: View, position: Int) {
                 launch {
@@ -181,7 +180,7 @@ class SearchActivity : MvvmActivity<ActivitySearchBinding, SearchViewModel, Hotk
                 )
             }
         })
-        rv_history.adapter = mHistoryAdapter
+        viewDataBinding.rvHistory.adapter = mHistoryAdapter
         searchHistroyViewModel = ViewModelProvider(this).get(SearchHistroyViewModel::class.java)
         searchHistroyViewModel?.getliveDataSearchHistroy()?.observe(this, { datas ->
             mHistoryAdapter.setList(datas)
@@ -220,11 +219,11 @@ class SearchActivity : MvvmActivity<ActivitySearchBinding, SearchViewModel, Hotk
         mRemoveMode = removeMode
         mHistoryAdapter.notifyDataSetChanged()
         if (removeMode) {
-            tv_down.visibility = View.VISIBLE
-            tv_clean.visibility = View.GONE
+            viewDataBinding.tvDown.visibility = View.VISIBLE
+            viewDataBinding.tvClean.visibility = View.GONE
         } else {
-            tv_down.visibility = View.GONE
-            tv_clean.visibility = View.VISIBLE
+            viewDataBinding.tvDown.visibility = View.GONE
+            viewDataBinding.tvClean.visibility = View.VISIBLE
         }
     }
 

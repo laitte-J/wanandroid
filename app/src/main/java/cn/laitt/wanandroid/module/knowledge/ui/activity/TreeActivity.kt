@@ -37,7 +37,7 @@ class TreeActivity : MvvmActivity<ActivityTreeBinding, MvvmBaseViewModel<*, *>?,
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         ImmersionBar.with(this).statusBarDarkFont(true).navigationBarColor(R.color.colorPrimary)
-            .init();
+            .init()
         data = intent.getSerializableExtra("data") as Tree.Data?
         if (data != null) {
             data?.children?.forEach {

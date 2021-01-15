@@ -11,4 +11,5 @@ interface Question {
      */
     @GET("wenda/list/{page}/json")
     fun getArticle(@Path("page") page: Int?): Observable<Article>
+
 }

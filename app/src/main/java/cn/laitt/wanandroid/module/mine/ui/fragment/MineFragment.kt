@@ -13,6 +13,7 @@ import cn.laitt.wanandroid.db.model.UserInfo
 import cn.laitt.wanandroid.db.vm.UserInfoViewModel
 import cn.laitt.wanandroid.module.login.ui.LoginActivity
 import cn.laitt.wanandroid.module.mine.ui.activity.CollectListActivity
+import cn.laitt.wanandroid.module.project.ui.activity.ProjectActivty
 import com.arch.base.common.utils.LiveDataBus
 import com.arch.base.core.fragment.MvvmFragment
 import com.arch.base.core.utils.ToastUtil
@@ -78,6 +79,7 @@ class MineFragment : MvvmFragment<FragmentMineBinding, MvvmBaseViewModel<*, *>, 
                     user = null
                     viewDataBinding.tvName.text = "请登录"
                     viewDataBinding.tvId.text = getString(R.string.uid, "xxxxx")
+                    viewDataBinding.ivIcon.setImageResource(R.mipmap.ic_launcher_round)
                 } else {
                     Log.w(tag, "用户信息发生变化")
                     user = datas[0]
@@ -95,6 +97,7 @@ class MineFragment : MvvmFragment<FragmentMineBinding, MvvmBaseViewModel<*, *>, 
                 viewDataBinding.executePendingBindings()
             })
         viewDataBinding.llCollect.setOnClickListener { CollectListActivity.start(requireContext()) }
+        viewDataBinding.rlProject.setOnClickListener { ProjectActivty.start(requireContext()) }
     }
 
 

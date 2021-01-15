@@ -43,6 +43,9 @@
         <activity
             android:name=".module.mine.ui.activity.CollectListActivity"
             android:launchMode="singleTask" />
+        <activity
+            android:name=".module.project.ui.activity.ProjectActivty"
+            android:launchMode="singleTask" />
     </application>
 
 </manifest>

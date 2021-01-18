@@ -23,7 +23,6 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 
 import com.arch.base.core.R;
-import com.arch.base.core.preference.PreferencesUtil;
 import com.arch.base.core.utils.LoadingUtil;
 import com.arch.base.core.utils.ToastUtil;
 import com.arch.base.core.viewmodel.MvvmBaseViewModel;
@@ -43,20 +42,20 @@ public abstract class MvvmFragment<V extends ViewDataBinding, VM extends MvvmBas
     protected VM viewModel;
     protected V viewDataBinding;
     protected String mFragmentTag = "";
-//    private LoadService mLoadService;
+    //    private LoadService mLoadService;
 // 请求单个权限
-protected ActivityResultLauncher requestPermission = registerForActivityResult(new ActivityResultContracts.RequestPermission(), new ActivityResultCallback<Boolean>() {
-    @Override
-    public void onActivityResult(Boolean result) {
-        if (result) {
-            ToastUtil.show("获取权限成功");
-        } else {
-            ToastUtil.show("获取权限失败");
+    protected ActivityResultLauncher requestPermission = registerForActivityResult(new ActivityResultContracts.RequestPermission(), new ActivityResultCallback<Boolean>() {
+        @Override
+        public void onActivityResult(Boolean result) {
+            if (result) {
+                ToastUtil.show("获取权限成功");
+            } else {
+                ToastUtil.show("获取权限失败");
+            }
         }
-    }
-});
+    });
     // 请求一组权限
-    protected   ActivityResultLauncher requestMultiplePermissions = registerForActivityResult(new ActivityResultContracts.RequestMultiplePermissions(), new ActivityResultCallback<Map<String, Boolean>>() {
+    protected ActivityResultLauncher requestMultiplePermissions = registerForActivityResult(new ActivityResultContracts.RequestMultiplePermissions(), new ActivityResultCallback<Map<String, Boolean>>() {
         @RequiresApi(api = Build.VERSION_CODES.N)
         @Override
         public void onActivityResult(Map<String, Boolean> result) {
@@ -65,10 +64,10 @@ protected ActivityResultLauncher requestPermission = registerForActivityResult(n
 //             public void accept(Map.Entry<String, Boolean> stringBooleanEntry) {
 //             }
 //         });
-            for(Map.Entry<String, Boolean> entry : result.entrySet()){
+            for (Map.Entry<String, Boolean> entry : result.entrySet()) {
                 String mapKey = entry.getKey();
                 Boolean mapValue = entry.getValue();
-                System.out.println(mapKey+":"+mapValue);
+                System.out.println(mapKey + ":" + mapValue);
             }
         }
     });
@@ -105,8 +104,8 @@ protected ActivityResultLauncher requestPermission = registerForActivityResult(n
         viewModel = getViewModel();
         if (viewModel != null) {
             getLifecycle().addObserver(viewModel);
-            viewModel.dataList.observe(this, this);
-            viewModel.viewStatusLiveData.observe(this, this);
+            viewModel.dataList.observe(getViewLifecycleOwner(), this);
+            viewModel.viewStatusLiveData.observe(getViewLifecycleOwner(), this);
             if (getBindingVariable() > 0) {
                 viewDataBinding.setVariable(getBindingVariable(), viewModel);
                 viewDataBinding.executePendingBindings();
@@ -225,7 +224,7 @@ protected ActivityResultLauncher requestPermission = registerForActivityResult(n
             }
         } else if (o instanceof ObservableArrayList) {
             //屏蔽初始化的时候发送的通知
-            if (viewModel.viewStatusLiveData.getValue() != ViewStatus.LOADING) {
+            if (viewModel.viewStatusLiveData.getValue() != null && viewModel.viewStatusLiveData.getValue() == ViewStatus.SHOW_CONTENT) {
                 onListItemInserted((ObservableArrayList<D>) o);
             }
         }

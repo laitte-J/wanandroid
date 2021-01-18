@@ -1,5 +1,6 @@
 package cn.laitt.wanandroid.module.knowledge.vm
 
+import android.util.Log
 import cn.laitt.wanandroid.api.Knowledge
 import cn.laitt.wanandroid.model.Data
 import cn.laitt.wanandroid.model.Navigation
@@ -16,6 +17,7 @@ class NavigationModel :
     override fun onSuccess(t: Navigation?, isFromCache: Boolean) {
         var data = ArrayList<Data>()
         data.addAll(t!!.data)
+        data.map { it.select=false }
         data[0].select = true
         loadSuccess(t, data, isFromCache)
     }
@@ -25,7 +27,6 @@ class NavigationModel :
     }
 
     override fun refresh() {
-        isRefresh = true
         load()
     }
 

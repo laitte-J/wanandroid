@@ -2,8 +2,6 @@ package com.arch.base.core.preference;
 
 import android.app.Application;
 import android.content.Context;
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 import android.text.TextUtils;
 
 import com.arch.base.core.utils.EditorUtils;
@@ -37,15 +35,11 @@ abstract class BasePreferences {
     }
 
     public void setBoolean(String key, boolean bool) {
-        SharedPreferences.Editor editor = mPreference.edit();
-        editor.putBoolean(key, bool);
-        EditorUtils.fastCommit(editor);
+        mPreference.putBoolean(key, bool);
     }
 
     public void setLong(String key, long value) {
-        SharedPreferences.Editor editor = mPreference.edit();
-        editor.putLong(key, value);
-        EditorUtils.fastCommit(editor);
+        mPreference.putLong(key, value);
     }
 
     public long getLong(String key, long defValue) {
@@ -57,9 +51,7 @@ abstract class BasePreferences {
     }
 
     public void setString(String key, String value) {
-        SharedPreferences.Editor editor = mPreference.edit();
-        editor.putString(key, value);
-        EditorUtils.fastCommit(editor);
+        mPreference.putString(key, value);
     }
 
     public int getInt(String key, int defaultVal) {
@@ -67,16 +59,12 @@ abstract class BasePreferences {
     }
 
     public void setInt(String key, int value) {
-        SharedPreferences.Editor editor = mPreference.edit();
-        editor.putInt(key, value);
-        EditorUtils.fastCommit(editor);
+        mPreference.putInt(key, value);
     }
 
     public void remove(String key) {
         if (!TextUtils.isEmpty(key) && mPreference.contains(key)) {
-            SharedPreferences.Editor editor = mPreference.edit();
-            editor.remove(key);
-            EditorUtils.fastCommit(editor);
+            mPreference.remove(key);
         }
     }
 
@@ -85,9 +73,7 @@ abstract class BasePreferences {
     }
 
     public void clearAll() {
-        SharedPreferences.Editor editor = mPreference.edit();
-        editor.clear();
-        EditorUtils.fastCommit(editor);
+        mPreference.clear();
     }
 
     public Map<String, ?> getAll() {

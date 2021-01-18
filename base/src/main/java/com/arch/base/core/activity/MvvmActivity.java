@@ -147,7 +147,7 @@ public abstract class MvvmActivity<V extends ViewDataBinding, VM extends MvvmBas
             }
         } else if (o instanceof ObservableArrayList) {
             //屏蔽初始化的时候发送的通知
-            if (viewModel.viewStatusLiveData.getValue() != ViewStatus.LOADING) {
+            if (viewModel.viewStatusLiveData.getValue() != null && viewModel.viewStatusLiveData.getValue() == ViewStatus.SHOW_CONTENT) {
                 onListItemInserted((ObservableArrayList<D>) o);
             }
         }

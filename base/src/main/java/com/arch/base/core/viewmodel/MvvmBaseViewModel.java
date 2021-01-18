@@ -67,8 +67,8 @@ public abstract class MvvmBaseViewModel<M extends MvvmBaseModel, D> extends View
                 dataList.getValue().addAll(data);
                 viewStatusLiveData.setValue(ViewStatus.SHOW_CONTENT);
             }
-            dataList.postValue(dataList.getValue());
             viewStatusLiveData.postValue(viewStatusLiveData.getValue());
+            dataList.postValue(dataList.getValue());
         }
     }
 

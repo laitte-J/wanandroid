@@ -2,7 +2,6 @@ package cn.laitt.wanandroid.module.knowledge.ui.fragment
 
 import android.os.Bundle
 import android.text.TextUtils
-import android.util.Log
 import android.view.View
 import androidx.databinding.ObservableList
 import androidx.lifecycle.ViewModelProvider
@@ -131,7 +130,7 @@ class NavigationFragment : MvvmFragment<FragmentNavigationBinding, NavigationVie
                 }
             }
         })
-
+//        viewModel.refresh()
     }
 
     /**
@@ -178,5 +177,6 @@ class NavigationFragment : MvvmFragment<FragmentNavigationBinding, NavigationVie
     override fun getFragmentTag() = javaClass.canonicalName
 
     override fun goToLogin() {
-        LoginActivity.start(requireContext())  }
+        LoginActivity.start(requireContext())
+    }
 }

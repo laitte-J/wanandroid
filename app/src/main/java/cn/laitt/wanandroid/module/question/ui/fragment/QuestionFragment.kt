@@ -56,7 +56,7 @@ class QuestionFragment :
             }
         })
 
-        quickAdapter.setOnItemChildClickListener { adapter, view, position ->
+        quickAdapter.setOnItemChildClickListener { _, _, position ->
             index = position
             if (quickAdapter.data[position].collect) {
                 unCollectViewModel?.uncollectArticle(quickAdapter.data[position].id)

@@ -41,7 +41,7 @@ class SearchHistroyViewModel(application: Application) : AndroidViewModel(applic
             withContext(Dispatchers.IO) {
                 var i = searchHistroyDao?.loadName(item.name)
                 if (i != null) {
-                    searchHistroyDao?.deleteOne(i!!)
+                    searchHistroyDao?.deleteOne(i)
                 }
                 searchHistroyDao?.insertOne(item)
             }
@@ -61,7 +61,7 @@ class SearchHistroyViewModel(application: Application) : AndroidViewModel(applic
             withContext(Dispatchers.IO) {
                 var i = searchHistroyDao?.loadName(name)
                 if (i != null) {
-                    searchHistroyDao?.deleteOne(i!!)
+                    searchHistroyDao?.deleteOne(i)
                 }
             }
         }

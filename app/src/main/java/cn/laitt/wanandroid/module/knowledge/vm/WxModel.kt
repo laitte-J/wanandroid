@@ -17,7 +17,7 @@ class WxModel : MvvmBaseModel<Wx, ArrayList<Wx.Data>>(
 
     override fun onSuccess(t: Wx, isFromCache: Boolean) {
         var dataBeans: ArrayList<Wx.Data> = java.util.ArrayList()
-        dataBeans.addAll(t.data!!)
+        dataBeans.addAll(t.data)
         loadSuccess(t, dataBeans, isFromCache)
     }
 

@@ -15,6 +15,9 @@ import androidx.databinding.ObservableList
 import androidx.lifecycle.ViewModelProvider
 import cn.laitt.wanandroid.R
 import cn.laitt.wanandroid.commom.Contact
+import cn.laitt.wanandroid.commom.RELOGIN_KEY
+import cn.laitt.wanandroid.commom.RELOGIN_USER
+import cn.laitt.wanandroid.commom.RELOGIN_VALUE
 import cn.laitt.wanandroid.databinding.ActivityLoginBinding
 import cn.laitt.wanandroid.db.model.UserInfo
 import cn.laitt.wanandroid.db.vm.UserInfoViewModel
@@ -94,7 +97,7 @@ class LoginActivity : MvvmActivity<ActivityLoginBinding, LoginViewModel, UserInf
                 }
             }
         })
-        viewDataBinding.btnLogin.setOnClickListener { view ->
+        viewDataBinding.btnLogin.setOnClickListener { _ ->
             if (TextUtils.isEmpty(
                     viewDataBinding.etUserName.text.toString().trim()
                 ) ||
@@ -112,7 +115,7 @@ class LoginActivity : MvvmActivity<ActivityLoginBinding, LoginViewModel, UserInf
                 viewDataBinding.etPassWord.text.toString().trim()
             )
         }
-        viewDataBinding.ivShowPwd.setOnClickListener { view ->
+        viewDataBinding.ivShowPwd.setOnClickListener { _ ->
             if (viewDataBinding.ivShowPwd.isActivated) {
                 viewDataBinding.etPassWord.transformationMethod =
                     PasswordTransformationMethod.getInstance()
@@ -122,7 +125,7 @@ class LoginActivity : MvvmActivity<ActivityLoginBinding, LoginViewModel, UserInf
             }
             viewDataBinding.ivShowPwd.isActivated = !viewDataBinding.ivShowPwd.isActivated
         }
-        viewDataBinding.ivClearUser.setOnClickListener { view ->
+        viewDataBinding.ivClearUser.setOnClickListener { _ ->
             viewDataBinding.etUserName.setText("")
             viewDataBinding.ivClearUser.visibility = View.INVISIBLE
         }
@@ -130,8 +133,8 @@ class LoginActivity : MvvmActivity<ActivityLoginBinding, LoginViewModel, UserInf
 
         userInfoViewModel?.getliveDataSearchUser()?.observe(this, { datas ->
             if (datas.size > 0) {
-                LiveDataBus.get().with(Contact.RELOGIN_KEY).setValue(Contact.RELOGIN_VALUE)
-                LiveDataBus.get().with(Contact.RELOGIN_USER).setValue(datas[0])
+                LiveDataBus.get().with(RELOGIN_KEY).setValue(RELOGIN_VALUE)
+                LiveDataBus.get().with(RELOGIN_USER).setValue(datas[0])
                 datas.map { Log.w("用户信息", "用户信息已保存" + it.username) }
                 finish()
             }

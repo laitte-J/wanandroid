@@ -34,7 +34,7 @@ class UserInfoViewModel(application: Application) : AndroidViewModel(application
             withContext(Dispatchers.IO) {
                 var i = userInfoDao?.loadName(item.username!!)
                 if (i != null) {
-                    userInfoDao?.deleteOne(i!!)
+                    userInfoDao?.deleteOne(i)
                 }
                 userInfoDao?.insertOne(item)
             }
@@ -66,7 +66,7 @@ class UserInfoViewModel(application: Application) : AndroidViewModel(application
             withContext(Dispatchers.IO) {
                 var i = userInfoDao?.loadName(name)
                 if (i != null) {
-                    userInfoDao?.deleteOne(i!!)
+                    userInfoDao?.deleteOne(i)
                 }
             }
         }

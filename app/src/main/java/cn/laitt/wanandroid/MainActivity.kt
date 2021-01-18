@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
+import android.os.Looper
 import android.view.KeyEvent
 import androidx.core.content.ContextCompat
 import androidx.databinding.ObservableList
@@ -25,6 +26,7 @@ import com.arch.base.core.utils.ToastUtil
 import com.arch.base.core.viewmodel.MvvmBaseViewModel
 import com.emcrp.network.beans.BaseResponse
 
+@Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 class MainActivity() :
     MvvmActivity<ActivityMainBinding, MvvmBaseViewModel<*, *>?, BaseResponse>() {
 
@@ -78,22 +80,22 @@ class MainActivity() :
         //用自定义的导航器来创建目的地
         val home = fragmentNavigator.createDestination()
         home.id = R.id.navigation_home
-        home.className = HomeFragment::class.java.getCanonicalName()
+        home.className = HomeFragment::class.java.canonicalName
         home.label = getString(R.string.home)
         navGraph.addDestination(home)
         val question = fragmentNavigator.createDestination()
         question.id = R.id.navigation_question
-        question.className = QuestionFragment::class.java.getCanonicalName()
+        question.className = QuestionFragment::class.java.canonicalName
         question.label = getString(R.string.question)
         navGraph.addDestination(question)
         val knowledge = fragmentNavigator.createDestination()
         knowledge.id = R.id.navigation_knowledge
-        knowledge.className = KnowledgeFragment::class.java.getCanonicalName()
+        knowledge.className = KnowledgeFragment::class.java.canonicalName
         knowledge.label = getString(R.string.knowledge)
         navGraph.addDestination(knowledge)
         val mine = fragmentNavigator.createDestination()
         mine.id = R.id.navigation_mine
-        mine.className = MineFragment::class.java.getCanonicalName()
+        mine.className = MineFragment::class.java.canonicalName
         mine.label = getString(R.string.mine)
         navGraph.addDestination(mine)
         navGraph.startDestination = R.id.navigation_home
@@ -127,7 +129,7 @@ class MainActivity() :
             time = System.currentTimeMillis()
             ToastUtil.show("再按一次退出应用！")
         }
-        Handler().postDelayed({ time = 0 }, 3000)
+        Handler(Looper.getMainLooper()).postDelayed({ time = 0 }, 3000)
     }
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {

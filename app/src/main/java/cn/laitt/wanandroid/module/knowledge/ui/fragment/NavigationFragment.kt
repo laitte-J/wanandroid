@@ -67,9 +67,9 @@ class NavigationFragment : MvvmFragment<FragmentNavigationBinding, NavigationVie
         mAdapterv1?.setOnItemClickListener(object : OnItemClickListener {
             override fun onItemClick(adapter: BaseQuickAdapter<*, *>, view: View, position: Int) {
                 if (index != position) {
-                    mAdapterv1?.data!![index]!!.select = false
+                    mAdapterv1?.data!![index].select = false
                     mAdapterv1?.notifyItemChanged(index)
-                    mAdapterv1?.data!![position]!!.select = true
+                    mAdapterv1?.data!![position].select = true
                     mAdapterv1?.notifyItemChanged(position)
                     index = position
                     if (position != -1) {
@@ -143,7 +143,6 @@ class NavigationFragment : MvvmFragment<FragmentNavigationBinding, NavigationVie
         // 最后一个可见位置
         val lastItem =
             mRecyclerView.getChildLayoutPosition(mRecyclerView.getChildAt(mRecyclerView.childCount - 1))
-        Log.e(tag, "smoothMoveToPosition: " + firstItem + "》>" + lastItem + ">>>" + position)
         if (position < firstItem) {
             // 第一种可能:跳转位置在第一个可见位置之前
             mRecyclerView.smoothScrollToPosition(position)

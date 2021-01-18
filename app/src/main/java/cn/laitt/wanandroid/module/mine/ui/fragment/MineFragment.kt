@@ -8,6 +8,9 @@ import androidx.lifecycle.ViewModelProvider
 import cn.laitt.wanandroid.R
 import cn.laitt.wanandroid.api.Login
 import cn.laitt.wanandroid.commom.Contact
+import cn.laitt.wanandroid.commom.LOGINOUT_KEY
+import cn.laitt.wanandroid.commom.LOGINOUT_VALUE
+import cn.laitt.wanandroid.commom.RELOGIN_USER
 import cn.laitt.wanandroid.databinding.FragmentMineBinding
 import cn.laitt.wanandroid.db.model.UserInfo
 import cn.laitt.wanandroid.db.vm.UserInfoViewModel
@@ -27,6 +30,7 @@ import io.reactivex.rxjava3.schedulers.Schedulers
 import kotlinx.coroutines.*
 import java.util.concurrent.TimeUnit
 
+@Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 class MineFragment : MvvmFragment<FragmentMineBinding, MvvmBaseViewModel<*, *>, BaseResponse?>(),
     CoroutineScope by MainScope() {
     private var userInfoViewModel: UserInfoViewModel? = null
@@ -53,8 +57,8 @@ class MineFragment : MvvmFragment<FragmentMineBinding, MvvmBaseViewModel<*, *>, 
                                         //登出成功清除用户信息
                                         userInfoViewModel?.deleteAll()
                                     }
-                                    LiveDataBus.get().with(Contact.LOGINOUT_KEY)
-                                        .setValue(Contact.LOGINOUT_VALUE)
+                                    LiveDataBus.get().with(LOGINOUT_KEY)
+                                        .setValue(LOGINOUT_VALUE)
                                     ToastUtil.show("登出成功！")
                                 }
                             }
@@ -89,7 +93,7 @@ class MineFragment : MvvmFragment<FragmentMineBinding, MvvmBaseViewModel<*, *>, 
             })
 
         LiveDataBus.get()
-            .with(Contact.RELOGIN_USER, UserInfo::class.java)
+            .with(RELOGIN_USER, UserInfo::class.java)
             .observe(viewLifecycleOwner, {
                 Log.w(tag, "onActivityCreated:重新登录 刷新数据! 用户====== " + it.toString())
                 user = it

@@ -15,7 +15,7 @@ class WxSearchResultModel(var key: String?=null,var cid:Int) : MvvmBaseModel<WxA
 ) {
     override fun onSuccess(t: WxArticel, isFromCache: Boolean) {
         var datas = ArrayList<DataX>()
-        datas.addAll(t.data!!.datas!!)
+        datas.addAll(t.data.datas)
         loadSuccess(t, datas, isFromCache)
     }
 

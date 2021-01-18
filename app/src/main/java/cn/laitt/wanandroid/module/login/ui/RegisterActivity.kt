@@ -16,6 +16,9 @@ import androidx.databinding.ObservableList
 import androidx.lifecycle.ViewModelProvider
 import cn.laitt.wanandroid.R
 import cn.laitt.wanandroid.commom.Contact
+import cn.laitt.wanandroid.commom.RELOGIN_KEY
+import cn.laitt.wanandroid.commom.RELOGIN_USER
+import cn.laitt.wanandroid.commom.RELOGIN_VALUE
 import cn.laitt.wanandroid.databinding.ActivityRegisterBinding
 import cn.laitt.wanandroid.db.model.UserInfo
 import cn.laitt.wanandroid.db.vm.UserInfoViewModel
@@ -107,7 +110,7 @@ class RegisterActivity : MvvmActivity<ActivityRegisterBinding, RegisterlViewMode
                 }
             }
         })
-        viewDataBinding.btnRegister.setOnClickListener { view ->
+        viewDataBinding.btnRegister.setOnClickListener { _ ->
             if (TextUtils.isEmpty(
                     viewDataBinding.etUserName.text.toString().trim()
                 ) ||
@@ -130,7 +133,7 @@ class RegisterActivity : MvvmActivity<ActivityRegisterBinding, RegisterlViewMode
                 viewDataBinding.etPassWordEnter.text.toString().trim()
             )
         }
-        viewDataBinding.ivShowPwd.setOnClickListener { view ->
+        viewDataBinding.ivShowPwd.setOnClickListener { _ ->
             if (viewDataBinding.ivShowPwd.isActivated) {
                 viewDataBinding.etPassWord.transformationMethod =
                     PasswordTransformationMethod.getInstance()
@@ -140,7 +143,7 @@ class RegisterActivity : MvvmActivity<ActivityRegisterBinding, RegisterlViewMode
             }
             viewDataBinding.ivShowPwd.isActivated = !viewDataBinding.ivShowPwd.isActivated
         }
-        viewDataBinding.ivShowPwdEnter.setOnClickListener { view ->
+        viewDataBinding.ivShowPwdEnter.setOnClickListener { _ ->
             if (viewDataBinding.ivShowPwdEnter.isActivated) {
                 viewDataBinding.etPassWordEnter.transformationMethod =
                     PasswordTransformationMethod.getInstance()
@@ -151,7 +154,7 @@ class RegisterActivity : MvvmActivity<ActivityRegisterBinding, RegisterlViewMode
             viewDataBinding.ivShowPwdEnter.isActivated = !viewDataBinding.ivShowPwdEnter.isActivated
         }
 
-        viewDataBinding.ivClearUser.setOnClickListener { view ->
+        viewDataBinding.ivClearUser.setOnClickListener { _ ->
             viewDataBinding.etUserName.setText("")
             viewDataBinding.ivClearUser.visibility = View.INVISIBLE
         }
@@ -159,8 +162,8 @@ class RegisterActivity : MvvmActivity<ActivityRegisterBinding, RegisterlViewMode
 
         userInfoViewModel?.getliveDataSearchUser()?.observe(this, { datas ->
             if (datas.size == 1) {
-                LiveDataBus.get().with(Contact.RELOGIN_KEY).setValue(Contact.RELOGIN_VALUE)
-                LiveDataBus.get().with(Contact.RELOGIN_USER).setValue(datas[0].id)
+                LiveDataBus.get().with(RELOGIN_KEY).setValue(RELOGIN_VALUE)
+                LiveDataBus.get().with(RELOGIN_USER).setValue(datas[0].id)
                 datas.map { Log.w("用户信息", "用户信息已保存" + it.username) }
                 finish()
             }
@@ -185,7 +188,7 @@ class RegisterActivity : MvvmActivity<ActivityRegisterBinding, RegisterlViewMode
 
     override fun onListItemInserted(sender: ObservableList<UserInfo>) {
         viewDataBinding.progress.hide()
-        if (sender != null && sender.size > 0) {
+        if ( sender.size > 0) {
             viewDataBinding.progress.hide()
             viewDataBinding.btnRegister.isEnabled = true
             sender[0].icon =

@@ -64,7 +64,7 @@ class CollectListActivity :
                     )
             }
         })
-        quickAdapter.setOnItemChildClickListener { adapter, view, position ->
+        quickAdapter.setOnItemChildClickListener { _, _, position ->
             index = position
             unCollectViewModel?.uncollectArticle(quickAdapter.data[position].id,quickAdapter.data[position].originId)
         }

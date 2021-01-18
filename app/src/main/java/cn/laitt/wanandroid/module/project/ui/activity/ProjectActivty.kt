@@ -20,6 +20,8 @@ import com.arch.base.core.activity.MvvmActivity
 import com.arch.base.core.utils.ToastUtil
 import com.google.android.material.tabs.TabLayoutMediator
 import com.gyf.immersionbar.ImmersionBar
+import java.util.*
+import kotlin.collections.ArrayList
 
 class ProjectActivty : MvvmActivity<ActivityProjectBinding, ProjectViewModel, Project.Data>() {
     companion object {
@@ -66,7 +68,7 @@ class ProjectActivty : MvvmActivity<ActivityProjectBinding, ProjectViewModel, Pr
     override fun onListItemInserted(sender: ObservableList<Project.Data>?) {
         if (sender != null) {
             fragmentList.clear()
-            sender?.forEach {
+            sender.forEach {
                 fragmentList.add(ProjectListFragment.create(it.id))
             }
             fragmentPager2Adapter =
@@ -75,7 +77,7 @@ class ProjectActivty : MvvmActivity<ActivityProjectBinding, ProjectViewModel, Pr
             TabLayoutMediator(
                 viewDataBinding.tb, viewDataBinding.viewpager2, true, true
             ) { tab, position ->
-                tab.text = sender?.get(position)?.name!!.toLowerCase()
+                tab.text = sender[position]?.name!!.toLowerCase(Locale.ROOT)
 
             }.attach()
         }

@@ -11,7 +11,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import cn.laitt.wanandroid.R
-import cn.laitt.wanandroid.commom.Contact
+import cn.laitt.wanandroid.commom.*
 import cn.laitt.wanandroid.databinding.FragmentHomeBinding
 import cn.laitt.wanandroid.model.Article
 import cn.laitt.wanandroid.model.Banner
@@ -38,6 +38,7 @@ import com.youth.banner.holder.BannerImageHolder
 import com.youth.banner.listener.OnBannerListener
 
 
+@Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 class HomeFragment : MvvmFragment<FragmentHomeBinding, BannerViewModel, Banner.DataBean>(),
     SimpleImmersionOwner {
     private val mSimpleImmersionProxy = SimpleImmersionProxy(this)
@@ -61,7 +62,7 @@ class HomeFragment : MvvmFragment<FragmentHomeBinding, BannerViewModel, Banner.D
     }
 
     override fun onListItemInserted(sender: ObservableList<Banner.DataBean>) {
-        if (sender != null && sender.size > 0) {
+        if (sender.size > 0) {
             viewDataBinding.banner.setAdapter(object : BannerImageAdapter<Banner.DataBean>(sender) {
                 override fun onBindView(
                     holder: BannerImageHolder?,
@@ -71,7 +72,7 @@ class HomeFragment : MvvmFragment<FragmentHomeBinding, BannerViewModel, Banner.D
                 ) {
                     //图片加载自己实现
                     Glide.with(holder!!.itemView)
-                        .load(data!!.imagePath)
+                        .load(data.imagePath)
                         .centerCrop()
                         .apply(RequestOptions.bitmapTransform(RoundedCorners(30)))
                         .into(holder.imageView)
@@ -219,7 +220,7 @@ class HomeFragment : MvvmFragment<FragmentHomeBinding, BannerViewModel, Banner.D
                     )
             }
         })
-        quickAdapter.setOnItemChildClickListener { adapter, view, position ->
+        quickAdapter.setOnItemChildClickListener { _, _, position ->
             index = position
             if (quickAdapter.data[position].collect) {
                 unCollectViewModel?.uncollectArticle(quickAdapter.data[position].id)
@@ -238,17 +239,17 @@ class HomeFragment : MvvmFragment<FragmentHomeBinding, BannerViewModel, Banner.D
         )
 
         LiveDataBus.get()
-            .with(Contact.RELOGIN_KEY, Int::class.java)
+            .with(RELOGIN_KEY, Int::class.java)
             .observe(viewLifecycleOwner, {
-                if (it == Contact.RELOGIN_VALUE) {
+                if (it == RELOGIN_VALUE) {
                     Log.w(tag, "onActivityCreated: 重新登录 刷新数据")
                     hotViewModel?.load()
                 }
             })
         LiveDataBus.get()
-            .with(Contact.LOGINOUT_KEY, Int::class.java)
+            .with(LOGINOUT_KEY, Int::class.java)
             .observe(viewLifecycleOwner, {
-                if (it == Contact.LOGINOUT_VALUE) {
+                if (it == LOGINOUT_VALUE) {
                     Log.w(tag, "onActivityCreated: 登出 刷新数据")
                     hotViewModel?.load()
                 }

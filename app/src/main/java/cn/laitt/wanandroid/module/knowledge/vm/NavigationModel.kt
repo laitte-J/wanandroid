@@ -14,10 +14,10 @@ class NavigationModel :
     }
 
     override fun onSuccess(t: Navigation?, isFromCache: Boolean) {
-        var datas = ArrayList<Data>()
-        datas.addAll(t!!.data)
-        datas!![0]?.select = true
-        loadSuccess(t, datas, isFromCache)
+        var data = ArrayList<Data>()
+        data.addAll(t!!.data)
+        data[0].select = true
+        loadSuccess(t, data, isFromCache)
     }
 
     override fun onFailure(e: Throwable?) {

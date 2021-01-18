@@ -19,6 +19,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseDataBindingHolder
 import com.google.android.flexbox.FlexboxLayoutManager
 
+@Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 class TreeFragment : MvvmFragment<FragmentTreeBinding, KnowledgeViewModel, Tree.Data>() {
     var adapter: BaseQuickAdapter<Tree.Data, BaseDataBindingHolder<ListitemTreeL1Binding>>? = null
 
@@ -37,28 +38,35 @@ class TreeFragment : MvvmFragment<FragmentTreeBinding, KnowledgeViewModel, Tree.
                 holder: BaseDataBindingHolder<ListitemTreeL1Binding>,
                 item: Tree.Data
             ) {
-                var databing = holder.dataBinding
-                if (databing != null) {
-                    databing.model = item
-                    databing.rcv.setNestedScrollingEnabled(false)
-                    databing.rcv.setHasFixedSize(true)
-                    databing.rcv.layoutManager = FlexboxLayoutManager(getContext())
-                    var adapter = object :
+                val a = item
+                val dabbing = holder.dataBinding
+                if (dabbing != null) {
+                    dabbing.model = item
+                    dabbing.rcv.isNestedScrollingEnabled = false
+                    dabbing.rcv.setHasFixedSize(true)
+                    dabbing.rcv.layoutManager = FlexboxLayoutManager(getContext())
+                    val adapter = object :
                         BaseQuickAdapter<Tree.Children, BaseDataBindingHolder<ListitemHotkeyBinding>>(
                             R.layout.listitem_hotkey
                         ) {
                         override fun convert(
                             holder: BaseDataBindingHolder<ListitemHotkeyBinding>,
-                            item1: Tree.Children
+                            item: Tree.Children
                         ) {
-                            var databing = holder.dataBinding
-                            if (databing != null) {
-                                databing.root.setOnClickListener { TreeActivity.start(getContext(),item,holder.adapterPosition) }
-                                databing.tvName.text = item1.name
+                            val dataBindingHolder = holder.dataBinding
+                            if (dataBindingHolder != null) {
+                                dataBindingHolder.root.setOnClickListener {
+                                    TreeActivity.start(
+                                        getContext(),
+                                        a,
+                                        holder.adapterPosition
+                                    )
+                                }
+                                dataBindingHolder.tvName.text = item.name
                             }
                         }
                     }
-                    databing.rcv.adapter = adapter
+                    dabbing.rcv.adapter = adapter
                     adapter.setList(item.children)
                 }
             }
@@ -101,5 +109,7 @@ class TreeFragment : MvvmFragment<FragmentTreeBinding, KnowledgeViewModel, Tree.
         return javaClass.canonicalName
     }
 
-    override fun goToLogin() {  LoginActivity.start(requireContext())}
+    override fun goToLogin() {
+        LoginActivity.start(requireContext())
+    }
 }

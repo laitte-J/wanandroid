@@ -8,7 +8,7 @@ import com.emcrp.network.observer.BaseObserver
 
 class CollectListModel() : MvvmBaseModel<Article, ArrayList<Article.DataBean.DatasBean>>(
     cn.laitt.wanandroid.model.Article::class.java, true,
-    "CollectListKEY", null, 1
+    null, null, 1
 ) {
     override fun onSuccess(t: Article, isFromCache: Boolean) {
         var datas = ArrayList<Article.DataBean.DatasBean>()

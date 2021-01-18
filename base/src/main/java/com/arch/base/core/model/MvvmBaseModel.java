@@ -16,7 +16,6 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.disposables.Disposable;
@@ -137,7 +136,6 @@ public abstract class MvvmBaseModel<F, T extends ArrayList> implements MvvmNetwo
 
     @CallSuper
     public void cancel() {
-        destoryThread();
         if (compositeDisposable != null && !compositeDisposable.isDisposed()) {
             compositeDisposable.dispose();
         }
@@ -158,54 +156,43 @@ public abstract class MvvmBaseModel<F, T extends ArrayList> implements MvvmNetwo
 
     ExecutorService cachedThreadPool;
 
-    private void destoryThread() {
-        if (cachedThreadPool != null && !cachedThreadPool.isShutdown()) {
-            cachedThreadPool.shutdown();
-            cachedThreadPool = null;
-        }
-    }
 
     public void getCachedDataAndLoad() {
-        cachedThreadPool = Executors.newCachedThreadPool();
-        cachedThreadPool.execute(new Runnable() {
-            @Override
-            public void run() {
-                if (mCachedPreferenceKey != null) {
-                    String saveDataString = BasicDataPreferenceUtil.getInstance().getString(mCachedPreferenceKey);
-                    if (!TextUtils.isEmpty(saveDataString)) {
-                        try {
-                            BaseCachedData data = GsonUtils.fromLocalJson(saveDataString, BaseCachedData.class);
-                            F savedData = GsonUtils.fromLocalJson(new JSONObject(saveDataString).getString("data"), clazz);
-                            if (savedData != null && savedData != null) {
-                                onSuccess(savedData, true);
-                                if (isNeedToUpdate(data)) {
-                                    load();
-                                }
-                                return;
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        } catch (Exception exception) {
-                            exception.printStackTrace();
-                        }
 
-                    }
-
-                    if (mApkPredefinedData != null) {
-
-                        F savedData = GsonUtils.fromLocalJson(mApkPredefinedData, clazz);
-                        if (savedData != null && savedData != null) {
-                            onSuccess(savedData, true);
-                        }
-                    }
-                }
+        if (mCachedPreferenceKey != null) {
+            String saveDataString = BasicDataPreferenceUtil.getInstance().getString(mCachedPreferenceKey);
+            if (!TextUtils.isEmpty(saveDataString)) {
                 try {
-                    load();
+                    BaseCachedData data = GsonUtils.fromLocalJson(saveDataString, BaseCachedData.class);
+                    F savedData = GsonUtils.fromLocalJson(new JSONObject(saveDataString).getString("data"), clazz);
+                    if (savedData != null && savedData != null) {
+                        onSuccess(savedData, true);
+                        if (isNeedToUpdate(data)) {
+                            load();
+                        }
+                        return;
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 } catch (Exception exception) {
                     exception.printStackTrace();
                 }
+
             }
-        });
+
+            if (mApkPredefinedData != null) {
+
+                F savedData = GsonUtils.fromLocalJson(mApkPredefinedData, clazz);
+                if (savedData != null && savedData != null) {
+                    onSuccess(savedData, true);
+                }
+            }
+        }
+        try {
+            load();
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
 
     }
 

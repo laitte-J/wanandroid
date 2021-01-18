@@ -117,6 +117,7 @@ class CollectListActivity :
             false
         )
         quickAdapter.setEmptyView(loadView)
+        viewModel?.tryToRefresh()
     }
 
 

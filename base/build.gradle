@@ -1,5 +1,6 @@
 apply plugin: 'com.android.library'
-
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 android {
     compileSdkVersion rootProject.compileSdkVersion
     buildToolsVersion '30.0.0'
@@ -44,6 +45,8 @@ dependencies {
     implementation "io.reactivex.rxjava3:rxjava:$rootProject.rxjava"
     implementation "com.squareup.retrofit2:retrofit:$rootProject.retrofit"
     implementation "com.tencent:mmkv-static:$rootProject.mmkv"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines"
 
 }
 

@@ -7,7 +7,7 @@ class CollectListViewModel : MvvmBaseViewModel<CollectListModel, Article.DataBea
     fun init(): CollectListViewModel {
         model = CollectListModel()
         model.register(this)
-        model.getCachedDataAndLoad()
+//        model.getCachedDataAndLoad()
         return this
     }
 

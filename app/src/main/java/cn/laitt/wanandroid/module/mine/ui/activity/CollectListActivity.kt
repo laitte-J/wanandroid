@@ -5,7 +5,6 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
-import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.ObservableList
@@ -14,13 +13,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import cn.laitt.wanandroid.R
 import cn.laitt.wanandroid.databinding.ActivityCollectListBinding
 import cn.laitt.wanandroid.model.Article
-import cn.laitt.wanandroid.module.home.vm.CollectViewModel
 import cn.laitt.wanandroid.module.home.vm.UnCollectViewModel
 import cn.laitt.wanandroid.module.knowledge.adapter.ArticleAdapter
 import cn.laitt.wanandroid.module.login.ui.LoginActivity
 import cn.laitt.wanandroid.module.mine.vm.CollectListViewModel
 import com.arch.base.core.activity.MvvmActivity
 import com.arch.base.core.utils.ToastUtil
+import com.arch.base.core.viewmodel.ViewStatus
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.listener.OnItemClickListener
 import com.emcrp.webview.WebviewActivity
@@ -67,7 +66,10 @@ class CollectListActivity :
         })
         quickAdapter.setOnItemChildClickListener { _, _, position ->
             index = position
-            unCollectViewModel?.uncollectArticle(quickAdapter.data[position].id,quickAdapter.data[position].originId)
+            unCollectViewModel?.uncollectArticle(
+                quickAdapter.data[position].id,
+                quickAdapter.data[position].originId
+            )
         }
 
         viewModel?.errorMessage?.observe(this, { s ->

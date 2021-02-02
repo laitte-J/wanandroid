@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.databinding.ObservableArrayList
 import androidx.databinding.ObservableList
 import androidx.lifecycle.*
+import com.arch.base.core.R
 import com.arch.base.core.model.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.MainScope
@@ -48,9 +49,12 @@ abstract class MvvmBaseViewModel<M : MvvmBaseModel<*, *>, D> : ViewModel(), Life
                     if (pageResult[0].isEmpty) {
                         if (pageResult[0].isFirstPage) {
                             viewStatusLiveData.setValue(ViewStatus.EMPTY)
+                            viewStatusLiveData.setValue(ViewStatus.SHOW_CONTENT)
                         } else {
+                            errorMessage.setValue(" ")
                             viewStatusLiveData.setValue(ViewStatus.NO_MORE_DATA)
                         }
+
                     } else {
                         dataList.value!!.addAll(data!!)
                         viewStatusLiveData.setValue(ViewStatus.SHOW_CONTENT)

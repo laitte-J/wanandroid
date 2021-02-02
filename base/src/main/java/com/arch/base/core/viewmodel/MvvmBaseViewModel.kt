@@ -121,6 +121,7 @@ abstract class MvvmBaseViewModel<M : MvvmBaseModel<*, *>, D> : ViewModel(), Life
     //    }
     companion object {
         const val FAILED_NOT_LOGIN = -1001 //请先登录
+
     }
 
     init {

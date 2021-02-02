@@ -15,6 +15,7 @@ import cn.laitt.wanandroid.module.home.vm.ArticleViewModel
 import cn.laitt.wanandroid.module.home.vm.CollectViewModel
 import cn.laitt.wanandroid.module.home.vm.UnCollectViewModel
 import cn.laitt.wanandroid.module.knowledge.adapter.ArticleAdapter
+import cn.laitt.wanandroid.module.login.ui.LoginActivity
 import cn.laitt.wanandroid.module.question.ui.vm.QuestionViewModel
 import com.arch.base.core.fragment.MvvmFragment
 import com.arch.base.core.utils.ToastUtil
@@ -142,5 +143,7 @@ class QuestionFragment :
         return this.javaClass.name
     }
 
-    override fun goToLogin() {}
+    override fun goToLogin() {
+        LoginActivity.start(requireContext())
+    }
 }

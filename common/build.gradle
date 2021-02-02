@@ -1,14 +1,12 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion rootProject.compileSdkVersion
+    compileSdkVersion rootProject.ext.compileSdkVersion
     buildToolsVersion '30.0.0'
 
     defaultConfig {
-        minSdkVersion rootProject.minSdkVersion
-        targetSdkVersion rootProject.targetSdkVersion
-        versionCode 1
-        versionName "1.0"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
         javaCompileOptions {
             annotationProcessorOptions {
                 arguments = [AROUTER_MODULE_NAME: project.getName()]
@@ -32,14 +30,14 @@ android {
 }
 
 dependencies {
-    api "com.github.bumptech.glide:glide:$rootProject.glide"
-    annotationProcessor "com.github.bumptech.glide:compiler:$rootProject.glide"
+    api "com.github.bumptech.glide:glide:$rootProject.ext.glide"
+    annotationProcessor "com.github.bumptech.glide:compiler:$rootProject.ext.glide"
 //    implementation 'com.youth.banner:banner:1.4.10'  //最新版本
     api project(':base')
     api project(":webview")
-    implementation "androidx.cardview:cardview:$rootProject.androidXCardviewVersion"
+    implementation "androidx.cardview:cardview:$rootProject.ext.androidXCardviewVersion"
 //    api 'com.alibaba:arouter-api:1.4.1' { exclude group: 'com.android.support' }
     implementation ('com.alibaba:arouter-api:1.4.1'){ exclude group: 'com.android.support' }
 //    implementation 'me.samlss:broccoli:1.0.0'//骨骼框架
-    annotationProcessor "com.alibaba:arouter-compiler:$rootProject.arouter"
+    annotationProcessor "com.alibaba:arouter-compiler:$rootProject.ext.arouter"
 }
